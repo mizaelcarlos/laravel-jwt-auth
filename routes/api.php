@@ -24,9 +24,10 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::get('/user-info', [AuthController::class, 'getUse']);    
 });
 
 Route::post('login', ['middleware' => 'api', 'uses' => 'AuthController@login',])->name('login');
+Route::post('register', ['middleware' => 'api', 'uses' => 'AuthController@register',])->name('register');
 Route::get('teste/', ['middleware' => 'api', 'uses' => 'teste\TesteController@index'])->name('teste.index');
+Route::post('teste/cadastrar', ['middleware' => 'api', 'uses' => 'teste\TesteController@cadastrar'])->name('teste.cadastrar');

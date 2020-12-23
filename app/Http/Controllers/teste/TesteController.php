@@ -35,9 +35,10 @@ class TesteController extends Controller
 
     public function cadastrar(Request $request){
 
+        
         $teste = new Teste();
         $teste->nome = $request->nome;
-        $teste->idade = $request->idade.
+        $teste->idade = intval($request->idade);
         $teste->save();
 
         return response()->json([
