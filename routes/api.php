@@ -27,7 +27,10 @@ Route::group([
     Route::get('/user-info', [AuthController::class, 'getUse']);    
 });
 
+
 Route::post('login', ['middleware' => 'api', 'uses' => 'AuthController@login',])->name('login');
 Route::post('register', ['middleware' => 'api', 'uses' => 'AuthController@register',])->name('register');
+Route::get('valida_requisicao', ['middleware' => 'api', 'uses' => 'teste\AuthController@valida_requisicao'])->name('valida_requisicao');
 Route::get('teste/', ['middleware' => 'api', 'uses' => 'teste\TesteController@index'])->name('teste.index');
 Route::post('teste/cadastrar', ['middleware' => 'api', 'uses' => 'teste\TesteController@cadastrar'])->name('teste.cadastrar');
+Route::delete('teste/excluir', ['middleware' => 'api', 'uses' => 'teste\TesteController@excluir'])->name('teste.excluir');

@@ -1,0 +1,96 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api com autenticação pow JWT",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "operationId": "App\\Http\\Controllers\\AuthController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email usuário"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Senha usuário"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Teste cadastrado com sucesso."
+                    },
+                    "401": {
+                        "description": "Email ou senha inválida"
+                    }
+                }
+            }
+        },
+        "/api/teste": {
+            "get": {
+                "operationId": "App\\Http\\Controllers\\teste\\TesteController::index",
+                "responses": {
+                    "200": {
+                        "description": "Lista de teste obtida com sucesso."
+                    },
+                    "400": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/api/teste/cadastrar": {
+            "post": {
+                "operationId": "App\\Http\\Controllers\\teste\\TesteController::cadastrar",
+                "responses": {
+                    "200": {
+                        "description": "Teste cadastrado com sucesso."
+                    },
+                    "400": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        },
+        "/api/teste/excluir": {
+            "delete": {
+                "operationId": "App\\Http\\Controllers\\teste\\TesteController::excluir",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id teste"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Teste removído com sucesso."
+                    },
+                    "400": {
+                        "description": "Não autenticado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "Authorization token obtained from logging in.",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearer": []
+        }
+    ]
+}

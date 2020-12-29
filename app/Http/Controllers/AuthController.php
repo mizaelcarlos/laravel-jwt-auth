@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
+
 
 use JWTAuth;
 use AppHttpRequestsRegisterAuthRequest;
@@ -19,6 +21,11 @@ class AuthController extends Controller
 {
     public $token = true;
 
+    public function valida_requisicao(){
+
+        return response()->json('Usuário não autenticado');
+
+    }
     public function register(Request $request)
     {
 
@@ -53,15 +60,26 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+        * @OA\Post(
+        *     path="/api/login",
+        *     @OA\Response(response="200", description="Teste cadastrado com sucesso."),
+        *     @OA\Response(response = 401, description = "Email ou senha inválida"),
+        *     @OA\Parameter(name = "email", description = "Email usuário",in="query"),
+        *     @OA\Parameter(name = "password", description = "Senha usuário",in="query"),
+        * )
+    */
+
     public function login(Request $request)
     {
+        
         $input = $request->only('email', 'password');
         $jwt_token = null;
 
         if (!$jwt_token = JWTAuth::attempt($input)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid Email or Password',
+                'message' => 'Email ou senha inválida',
             ], Response::HTTP_UNAUTHORIZED);
         }
 
