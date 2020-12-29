@@ -31,28 +31,29 @@ Inserir anotation em método do controler que deseja gerar a documentação:
 
 Exemplo:
 
-/**
+ /**
 * @OA\Get(
 *     path="/api/teste",
-*     @OA\Response(response="200", description="Lista de teste obtida com sucesso.")
+*     @OA\Response(response="200", description="Lista de teste obtida com sucesso."),
+*     @OA\Response(response = 400, description = "Não autenticado"),
 * )
-* @OA\Response(
-* response = 204,
-* description = "Operação bem-sucedida",
-* @OA\JsonContent()
-*),
-* @OA\Response(
-* response = 400,
-* description = "Não autenticado",
-*),
-* @OA\Response(
-* response = 403,
-* description = "Proibido"
-*),
-* @OA\Response(
-* response = 404,
-* description = "Recurso não encontrado"
-*)
+*/
+
+/**
+* @OA\Post(
+*     path="/api/teste/cadastrar",
+*     @OA\Response(response="200", description="Teste cadastrado com sucesso."),
+*     @OA\Response(response = 400, description = "Não autenticado"),
+* )
+*/
+
+/**
+* @OA\Delete(
+*     path="/api/teste/excluir",
+*     @OA\Response(response="200", description="Teste removído com sucesso."),
+*     @OA\Response(response = 400, description = "Não autenticado"),
+*     @OA\Parameter(name = "id", description = "id teste",in="query"),
+* )
 */
 
 public function index(Request $request)
