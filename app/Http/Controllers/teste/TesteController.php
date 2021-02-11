@@ -43,11 +43,28 @@ class TesteController extends Controller
     }
 
     /**
-        * @OA\Post(
-        *     path="/api/teste/cadastrar",
-        *     @OA\Response(response="200", description="Teste cadastrado com sucesso."),
-        *     @OA\Response(response = 400, description = "Não autenticado"),
-        * )
+    * @OA\Post(
+    *     path="/api/teste/cadastrar",
+    *     tags={"cadastrar teste"},
+    *     @OA\Response(response="200", description="Teste cadastrado com sucesso."),
+    *     @OA\Response(response = 400, description = "Não autenticado"),
+    *     @OA\Parameter(
+    *     name = "nome",
+    *     description = "Nome do teste",
+    *     in="query", 
+    *     @OA\Schema(
+    *         type="string"
+    *     )
+    *   ),
+    *     @OA\Parameter(
+    *    name = "idade",
+    *    description = "Idade do teste",
+    *    in="query",
+    *     @OA\Schema(
+    *         type="string"
+    *     )
+    *   ),
+    * )
     */
 
     public function cadastrar(Request $request){

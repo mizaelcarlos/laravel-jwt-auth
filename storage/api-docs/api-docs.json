@@ -7,23 +7,38 @@
     "paths": {
         "/api/login": {
             "post": {
-                "operationId": "App\\Http\\Controllers\\AuthController::login",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "Email usuário"
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "Senha usuário"
-                    }
+                "tags": [
+                    "login"
                 ],
+                "operationId": "App\\Http\\Controllers\\AuthController::login",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
-                    "200": {
-                        "description": "Teste cadastrado com sucesso."
-                    },
                     "401": {
                         "description": "Email ou senha inválida"
                     }
@@ -45,7 +60,28 @@
         },
         "/api/teste/cadastrar": {
             "post": {
+                "tags": [
+                    "cadastrar teste"
+                ],
                 "operationId": "App\\Http\\Controllers\\teste\\TesteController::cadastrar",
+                "parameters": [
+                    {
+                        "name": "nome",
+                        "in": "query",
+                        "description": "Nome do teste",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idade",
+                        "in": "query",
+                        "description": "Idade do teste",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Teste cadastrado com sucesso."

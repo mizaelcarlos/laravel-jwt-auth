@@ -61,13 +61,20 @@ class AuthController extends Controller
     }
 
     /**
-        * @OA\Post(
-        *     path="/api/login",
-        *     @OA\Response(response="200", description="Teste cadastrado com sucesso."),
-        *     @OA\Response(response = 401, description = "Email ou senha inválida"),
-        *     @OA\Parameter(name = "email", description = "Email usuário",in="query"),
-        *     @OA\Parameter(name = "password", description = "Senha usuário",in="query"),
-        * )
+    * @OA\Post(
+    *     path="/api/login",
+    *     tags={"login"},
+    * @OA\RequestBody(
+    *    required=true,
+    *    description="Pass user credentials",
+    *    @OA\JsonContent(
+    *       required={"email","password"},
+    *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+    *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+    *    ),
+    * ),
+    *     @OA\Response(response = 401, description = "Email ou senha inválida"),
+    * )
     */
 
     public function login(Request $request)
